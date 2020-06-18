@@ -13,5 +13,17 @@ module LSP::Protocol
       method:  String,
       params:  RequestType,
     })
+
+    def hover?
+      method == "textDocument/hover"
+    end
+
+    def definition?
+      method == "textDocument/definition"
+    end
+
+    def completion?
+      method == "textDocument/completion"
+    end
   end
 end
