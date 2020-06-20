@@ -1,13 +1,12 @@
 module LSP::Protocol
   struct Initialize
-    JSON.mapping(
-      jsonrpc: String,
-      id: Int32,
-      result: InitializeResult
-    )
+    include JSON::Serializable
 
-    def initialize(msg_id : Int32, server_capabilities : ServerCapabilities)
-      @jsonrpc = "2.0"
+    property jsonrpc : String = "2.0"
+    property id : Int32
+    property result : InitializeResult
+
+    def initialize(msg_id, server_capabilities)
       @id = msg_id
       @result = InitializeResult.new(server_capabilities)
     end
