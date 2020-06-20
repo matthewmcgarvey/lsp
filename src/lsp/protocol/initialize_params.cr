@@ -1,11 +1,16 @@
 module LSP::Protocol
   struct InitializeParams
-    JSON.mapping({
-      process_id:   {type: Int64 | Int32 | Nil, key: "processId", nilable: true},
-      root_uri:     {type: String | Nil, key: "rootUri", nilable: true},
-      root_path:    {type: String | Nil, key: "rootPath", nilable: true},
-      capabilities: JSON::Any,
-      trace:        String?,
-    })
+    include JSON::Serializable
+
+    @[JSON::Field(key: "processId")]
+    property process_id : Int64 | Int32 | Nil
+
+    @[JSON::Field(key: "rootUri")]
+    property root_uri : String?
+
+    @[JSON::Field(key: "rootPath")]
+    property root_path : String?
+    property capabilities : JSON::Any
+    property trace : String?
   end
 end
